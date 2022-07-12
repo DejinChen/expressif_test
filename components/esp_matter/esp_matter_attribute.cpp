@@ -1005,6 +1005,12 @@ attribute_t *create_color_loop_stored_enhanced_hue(cluster_t *cluster, uint16_t 
                                          ATTRIBUTE_FLAG_NONE, esp_matter_uint16(value));
 }
 
+attribute_t *create_number_of_primaries(cluster_t *cluster, uint8_t value)
+{
+    return esp_matter::attribute::create(cluster, ColorControl::Attributes::NumberOfPrimaries::Id, ATTRIBUTE_FLAG_NONE,
+                                         esp_matter_uint8(value));
+}
+
 } /* attribute */
 } /* color_control */
 

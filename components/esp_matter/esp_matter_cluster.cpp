@@ -1013,6 +1013,9 @@ cluster_t *create(endpoint_t *endpoint, config_t *config, uint8_t flags, uint32_
 
         /* Attributes managed internally */
         attribute::create_remaining_time(cluster, 0);
+        // We only support reading the NumberOfPrimaries in ColorControl cluster
+        // Write the default value 0 to this attribute
+        attribute::create_number_of_primaries(cluster, 0);
     }
 
     /* Features */
