@@ -1028,6 +1028,8 @@ EmberAfStatus emberAfExternalAttributeWriteCallback(EndpointId endpoint_id, Clus
     }
 
     /* Update val */
-    attribute::set_val(attribute, &val);
+    if (val.type != ESP_MATTER_VAL_TYPE_INVALID) {
+        attribute::set_val(attribute, &val);
+    }
     return EMBER_ZCL_STATUS_SUCCESS;
 }
