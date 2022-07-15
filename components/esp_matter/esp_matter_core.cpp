@@ -18,6 +18,7 @@
 #include <nvs.h>
 
 #include <app/clusters/network-commissioning/network-commissioning.h>
+#include <app/clusters/general-diagnostics-server/general-diagnostics-server.h>
 #include <app/server/Dnssd.h>
 #include <app/server/Server.h>
 #include <app/util/attribute-storage.h>
@@ -25,6 +26,7 @@
 #include <credentials/examples/DeviceAttestationCredsExample.h>
 #include <platform/CHIPDeviceLayer.h>
 #include <platform/DeviceInstanceInfoProvider.h>
+#include <platform/DiagnosticDataProvider.h>
 #include <platform/ESP32/ESP32FactoryDataProvider.h>
 #include <platform/ESP32/NetworkCommissioningDriver.h>
 #if CHIP_DEVICE_CONFIG_ENABLE_THREAD
@@ -44,6 +46,8 @@ using chip::DeviceLayer::ConfigurationMgr;
 using chip::DeviceLayer::ConnectivityManager;
 using chip::DeviceLayer::ConnectivityMgr;
 using chip::DeviceLayer::PlatformMgr;
+using chip::DeviceLayer::DiagnosticDataProvider;
+using chip::DeviceLayer::GetDiagnosticDataProvider;
 #if CHIP_DEVICE_CONFIG_ENABLE_THREAD
 using chip::DeviceLayer::ThreadStackMgr;
 #endif
@@ -671,6 +675,11 @@ static void esp_matter_chip_init_task(intptr_t context)
     }
     // Add this function to record start up event in basic information cluster.
     PlatformMgr().HandleServerStarted();
+    chip::app::Clusters::GeneralDiagnostics::BootReasonType bootReason;
+    if (GetDiagnosticDataProvider().GetBootReason(bootReason) == CHIP_NO_ERROR)
+    {
+        chip::app::Clusters::GeneralDiagnosticsServer::Instance().OnDeviceReboot(bootReason);
+    }
 #if CHIP_DEVICE_CONFIG_ENABLE_WIFI
     {
         static chip::app::Clusters::NetworkCommissioning::Instance sWiFiNetworkCommissioningInstance(0,
