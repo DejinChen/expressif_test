@@ -1082,27 +1082,27 @@ attribute_t *create_primary_n_intensity(cluster_t * cluster, uint8_t value, uint
     switch (index) {
     case 1:
         return esp_matter::attribute::create(cluster, ColorControl::Attributes::Primary1Intensity::Id, ATTRIBUTE_FLAG_NONE,
-                                             esp_matter_uint16(value));
+                                             esp_matter_uint8(value));
         break;
     case 2:
         return esp_matter::attribute::create(cluster, ColorControl::Attributes::Primary2Intensity::Id, ATTRIBUTE_FLAG_NONE,
-                                             esp_matter_uint16(value));
+                                             esp_matter_uint8(value));
         break;
     case 3:
         return esp_matter::attribute::create(cluster, ColorControl::Attributes::Primary3Intensity::Id, ATTRIBUTE_FLAG_NONE,
-                                             esp_matter_uint16(value));
+                                             esp_matter_uint8(value));
         break;
     case 4:
         return esp_matter::attribute::create(cluster, ColorControl::Attributes::Primary4Intensity::Id, ATTRIBUTE_FLAG_NONE,
-                                             esp_matter_uint16(value));
+                                             esp_matter_uint8(value));
         break;
     case 5:
         return esp_matter::attribute::create(cluster, ColorControl::Attributes::Primary5Intensity::Id, ATTRIBUTE_FLAG_NONE,
-                                             esp_matter_uint16(value));
+                                             esp_matter_uint8(value));
         break;
     case 6:
         return esp_matter::attribute::create(cluster, ColorControl::Attributes::Primary6Intensity::Id, ATTRIBUTE_FLAG_NONE,
-                                             esp_matter_uint16(value));
+                                             esp_matter_uint8(value));
         break;
     default:
         break;
